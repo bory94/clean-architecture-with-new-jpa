@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:~/temp
+      username: sa
+      password:
+      pool-name: hikari-pool
+      maximum-pool-size: 20
+      minimum-idle: 10
+      driver-class-name: org.h2.Driver
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database: h2
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+logging:
+  level:
+    root: INFO
+    com.bory.tutorial.cleanarchitecture: DEBUG
+    org.hibernate.type.descriptor.sql: trace
