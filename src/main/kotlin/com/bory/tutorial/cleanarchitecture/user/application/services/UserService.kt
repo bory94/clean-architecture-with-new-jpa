@@ -1,6 +1,6 @@
 package com.bory.tutorial.cleanarchitecture.user.application.services
 
-import com.bory.tutorial.cleanarchitecture.common.exception.ResourceAlreadyExistsException
+import com.bory.tutorial.cleanarchitecture.exception.ResourceAlreadyExistsException
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInCommands
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInQueries
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommands

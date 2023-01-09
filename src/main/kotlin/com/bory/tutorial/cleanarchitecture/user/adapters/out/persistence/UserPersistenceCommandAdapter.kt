@@ -1,6 +1,6 @@
 package com.bory.tutorial.cleanarchitecture.user.adapters.out.persistence
 
-import com.bory.tutorial.cleanarchitecture.common.exception.ResourceNotFoundException
+import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommands
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.stereotype.Component

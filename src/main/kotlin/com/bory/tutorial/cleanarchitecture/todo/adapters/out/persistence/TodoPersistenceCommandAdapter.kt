@@ -1,6 +1,6 @@
 package com.bory.tutorial.cleanarchitecture.todo.adapters.out.persistence
 
-import com.bory.tutorial.cleanarchitecture.common.exception.ResourceNotFoundException
+import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommands
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Component

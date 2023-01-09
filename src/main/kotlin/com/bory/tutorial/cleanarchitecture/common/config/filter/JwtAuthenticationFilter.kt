@@ -1,9 +1,9 @@
-package com.bory.tutorial.cleanarchitecture.config.filter
+package com.bory.tutorial.cleanarchitecture.common.config.filter
 
 import com.bory.tutorial.cleanarchitecture.common.LOGGER
-import com.bory.tutorial.cleanarchitecture.common.exception.InvalidJwtTokenException
 import com.bory.tutorial.cleanarchitecture.common.service.JwtService
 import com.bory.tutorial.cleanarchitecture.common.service.JwtUserDetailsService
+import com.bory.tutorial.cleanarchitecture.exception.InvalidJwtTokenException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

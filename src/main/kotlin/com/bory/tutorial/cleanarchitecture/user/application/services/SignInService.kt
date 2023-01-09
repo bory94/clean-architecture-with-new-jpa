@@ -1,7 +1,7 @@
 package com.bory.tutorial.cleanarchitecture.user.application.services
 
 import com.bory.tutorial.cleanarchitecture.common.LOGGER
-import com.bory.tutorial.cleanarchitecture.common.exception.ResourceNotFoundException
+import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.common.service.JwtService
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignInCommand
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmail

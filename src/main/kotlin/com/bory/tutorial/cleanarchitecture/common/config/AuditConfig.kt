@@ -1,4 +1,4 @@
-package com.bory.tutorial.cleanarchitecture.config
+package com.bory.tutorial.cleanarchitecture.common.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

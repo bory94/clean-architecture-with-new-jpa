@@ -1,7 +1,7 @@
-package com.bory.tutorial.cleanarchitecture.config
+package com.bory.tutorial.cleanarchitecture.common.config
 
+import com.bory.tutorial.cleanarchitecture.common.config.filter.JwtAuthenticationFilter
 import com.bory.tutorial.cleanarchitecture.common.service.JwtUserDetailsService
-import com.bory.tutorial.cleanarchitecture.config.filter.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager

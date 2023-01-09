@@ -10,4 +10,16 @@ class CleanArchitectureWithNewJpaApplicationTests {
     fun contextLoads() {
     }
 
+//    @Test
+//    fun verifyModuleDependencies() {
+//        val modules =
+//            ApplicationModules.of(CleanArchitectureWithNewJpaApplication::class.java).verify()
+//
+//        Documenter(modules)
+//            .writeDocumentation()
+//            .writeModulesAsPlantUml(
+//                Documenter.DiagramOptions.defaults().withTargetFileName("all-components.puml")
+//            )
+//    }
+
 }
