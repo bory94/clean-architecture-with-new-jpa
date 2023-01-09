@@ -1,8 +1,8 @@
 package com.bory.tutorial.cleanarchitecture.user.application.services
 
 import com.bory.tutorial.cleanarchitecture.common.LOGGER
-import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.common.service.JwtService
+import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignInCommand
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmail
 import com.bory.tutorial.cleanarchitecture.user.domain.SignInVo
@@ -33,11 +33,11 @@ class SignInService(
         LOGGER.debug("authentication.authorities: ${authentication.authorities}")
         LOGGER.debug("authentication.details: ${authentication.details}")
 
-        val savedUser = userQueryByEmail.findByEmail(signInVo.email)
-            ?: throw ResourceNotFoundException("User[${signInVo.email} not found")
+        val savedUser = userQueryByEmail.findByEmail(authentication.name)
+            ?: throw ResourceNotFoundException("User[${authentication.name} not found")
 
         if (!passwordEncoder.matches(signInVo.password, savedUser.password)) {
-            throw ResourceNotFoundException("User[${signInVo.email} not found")
+            throw ResourceNotFoundException("User[${authentication.name} not found")
         }
 
         return jwtService.generateToken(savedUser)
