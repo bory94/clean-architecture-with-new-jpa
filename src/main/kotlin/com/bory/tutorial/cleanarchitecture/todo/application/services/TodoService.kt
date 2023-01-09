@@ -1,9 +1,9 @@
 package com.bory.tutorial.cleanarchitecture.todo.application.services
 
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.TodoInCommands
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.TodoInQueryPorts
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.TodoOutCommands
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.TodoOutQueryPorts
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInCommands
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInQueries
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommands
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutQueries
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
@@ -13,20 +13,20 @@ import java.util.*
 @Service
 @Transactional
 class TodoService(
-    private val todoOutQueryPorts: TodoOutQueryPorts,
-    private val todoOutCommands: TodoOutCommands
-) : TodoInCommands, TodoInQueryPorts {
+    private val genericTodoOutQueries: GenericTodoOutQueries,
+    private val genericTodoOutCommands: GenericTodoOutCommands
+) : GenericTodoInCommands, GenericTodoInQueries {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    override fun findAll(): List<Todo> = todoOutQueryPorts.findAll()
+    override fun findAll(): List<Todo> = genericTodoOutQueries.findAll()
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    override fun findOne(uuid: UUID): Todo = todoOutQueryPorts.findOne(uuid)
+    override fun findOne(uuid: UUID): Todo = genericTodoOutQueries.findOne(uuid)
 
-    override fun create(todo: Todo): Todo = todoOutCommands.create(todo)
+    override fun create(todo: Todo): Todo = genericTodoOutCommands.create(todo)
 
-    override fun modify(uuid: UUID, todo: Todo): Todo = todoOutCommands.modify(uuid, todo)
+    override fun modify(uuid: UUID, todo: Todo): Todo = genericTodoOutCommands.modify(uuid, todo)
 
-    override fun delete(uuid: UUID): Todo = todoOutCommands.delete(uuid)
+    override fun delete(uuid: UUID): Todo = genericTodoOutCommands.delete(uuid)
 
-    override fun toggleDone(uuid: UUID): Todo = todoOutCommands.toggleDone(uuid)
+    override fun toggleDone(uuid: UUID): Todo = genericTodoOutCommands.toggleDone(uuid)
 }

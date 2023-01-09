@@ -1,7 +1,7 @@
 package com.bory.tutorial.cleanarchitecture.todo.adapters.out.persistence
 
-import com.bory.tutorial.cleanarchitecture.todo.adapters.out.persistence.exception.ResourceNotFoundException
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.TodoOutCommands
+import com.bory.tutorial.cleanarchitecture.common.exception.ResourceNotFoundException
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommands
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Component
 import java.util.*
@@ -10,7 +10,7 @@ import java.util.*
 class TodoPersistenceCommandAdapter(
     private val todoRepository: TodoRepository,
     private val todoMapper: TodoMapper
-) : TodoOutCommands {
+) : GenericTodoOutCommands {
     override fun create(todo: Todo): Todo {
         LOGGER.debug("Creating a new Todo: $todo")
         val savedTodoEntity = todoRepository.save(
