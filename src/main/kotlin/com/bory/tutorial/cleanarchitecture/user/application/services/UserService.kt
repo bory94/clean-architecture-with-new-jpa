@@ -1,11 +1,11 @@
 package com.bory.tutorial.cleanarchitecture.user.application.services
 
 import com.bory.tutorial.cleanarchitecture.exception.ResourceAlreadyExistsException
-import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInCommands
-import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInQueries
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommands
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutQueries
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmail
+import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInCommandUsecases
+import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInQueryUsecases
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommandUsecases
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutQueryUsecases
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmailUsecase
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -16,11 +16,11 @@ import java.util.*
 @Service
 @Transactional
 class UserService(
-    private val genericUserOutQueries: GenericUserOutQueries,
-    private val userQueryByEmail: UserQueryByEmail,
-    private val genericUserOutCommands: GenericUserOutCommands,
+    private val genericUserOutQueries: GenericUserOutQueryUsecases,
+    private val userQueryByEmail: UserQueryByEmailUsecase,
+    private val genericUserOutCommands: GenericUserOutCommandUsecases,
     private val passwordEncoder: PasswordEncoder
-) : GenericUserInCommands, GenericUserInQueries {
+) : GenericUserInCommandUsecases, GenericUserInQueryUsecases {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     override fun findAll(): List<User> = genericUserOutQueries.findAll()
 

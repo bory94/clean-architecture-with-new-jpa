@@ -1,6 +1,6 @@
 package com.bory.tutorial.cleanarchitecture.user.adapters.`in`.web
 
-import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignInCommand
+import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignInCommandUsecase
 import com.bory.tutorial.cleanarchitecture.user.domain.SignInVo
 import jakarta.validation.Valid
 import org.springframework.http.HttpHeaders
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/public/v1/sign-in")
 class SignInController(
-    private val signInCommand: SignInCommand
+    private val signInCommand: SignInCommandUsecase
 ) {
     @PostMapping
     fun signIn(@RequestBody @Valid signInVo: SignInVo) =

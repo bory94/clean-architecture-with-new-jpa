@@ -7,6 +7,7 @@ import com.bory.tutorial.cleanarchitecture.exception.InvalidJwtTokenException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -70,7 +71,7 @@ class JwtAuthenticationFilter(
 }
 
 private fun HttpServletRequest.authorizationHeader(): String? {
-    val authHeader = getHeader("Authorization") ?: ""
+    val authHeader = getHeader(HttpHeaders.AUTHORIZATION) ?: ""
     if (!authHeader.startsWith(BEARER_KEY)) {
         return null
     }

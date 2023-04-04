@@ -1,9 +1,9 @@
 package com.bory.tutorial.cleanarchitecture.todo.application.services
 
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInCommands
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInQueries
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommands
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutQueries
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInCommandUsecases
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.`in`.GenericTodoInQueryUsecases
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommandUsecases
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutQueryUsecases
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
@@ -13,9 +13,9 @@ import java.util.*
 @Service
 @Transactional
 class TodoService(
-    private val genericTodoOutQueries: GenericTodoOutQueries,
-    private val genericTodoOutCommands: GenericTodoOutCommands
-) : GenericTodoInCommands, GenericTodoInQueries {
+    private val genericTodoOutQueries: GenericTodoOutQueryUsecases,
+    private val genericTodoOutCommands: GenericTodoOutCommandUsecases
+) : GenericTodoInCommandUsecases, GenericTodoInQueryUsecases {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     override fun findAll(): List<Todo> = genericTodoOutQueries.findAll()
 

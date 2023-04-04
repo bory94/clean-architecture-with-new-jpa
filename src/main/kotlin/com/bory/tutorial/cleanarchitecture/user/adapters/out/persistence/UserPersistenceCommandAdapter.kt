@@ -1,7 +1,7 @@
 package com.bory.tutorial.cleanarchitecture.user.adapters.out.persistence
 
 import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommands
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommandUsecases
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.stereotype.Component
 import java.util.*
@@ -10,7 +10,7 @@ import java.util.*
 class UserPersistenceCommandAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper
-) : GenericUserOutCommands {
+) : GenericUserOutCommandUsecases {
     override fun create(user: User): User {
         val savedEntity = userRepository.save(userMapper.toEntity(user))
 

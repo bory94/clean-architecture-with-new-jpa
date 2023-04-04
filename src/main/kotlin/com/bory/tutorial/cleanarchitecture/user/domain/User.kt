@@ -15,9 +15,9 @@ class User(
     var name: String? = null,
     var email: String? = null,
     private var password: String? = null,
-    var createdBy: Long? = 0,
+    var createdBy: UUID? = null,
     var createdTime: LocalDateTime? = LocalDateTime.now(),
-    var modifiedBy: Long? = 0,
+    var modifiedBy: UUID? = null,
     var modifiedTime: LocalDateTime? = LocalDateTime.now()
 ) : UserDetails {
     fun encodePassword(passwordEncoder: PasswordEncoder) = apply {
@@ -61,7 +61,7 @@ data class SignUpVo(
     @NotEmpty @Length(min = 8)
     val passwordConfirm: String
 ) {
-    fun createUser(passwordEncoder: PasswordEncoder): User = User(
-        name = name, email = email, password = passwordEncoder.encode(password)
+    fun createUser(encodedPassword: String): User = User(
+        name = name, email = email, password = encodedPassword
     )
 }

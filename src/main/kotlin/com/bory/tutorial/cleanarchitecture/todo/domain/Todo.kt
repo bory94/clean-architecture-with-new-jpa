@@ -9,9 +9,9 @@ data class Todo(
     @NotEmpty
     var title: String,
     var done: Boolean = false,
-    var createdBy: Long? = null,
+    var createdBy: UUID? = null,
     var createdTime: LocalDateTime? = LocalDateTime.now(),
-    var modifiedBy: Long? = null,
+    var modifiedBy: UUID? = null,
     var modifiedTime: LocalDateTime? = LocalDateTime.now()
 ) {
     fun toggleDone() = apply {

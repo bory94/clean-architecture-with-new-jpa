@@ -1,7 +1,7 @@
 package com.bory.tutorial.cleanarchitecture.todo.adapters.out.persistence
 
 import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
-import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommands
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommandUsecases
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Component
 import java.util.*
@@ -10,9 +10,9 @@ import java.util.*
 class TodoPersistenceCommandAdapter(
     private val todoRepository: TodoRepository,
     private val todoMapper: TodoMapper
-) : GenericTodoOutCommands {
+) : GenericTodoOutCommandUsecases {
     override fun create(todo: Todo): Todo {
-        LOGGER.debug("Creating a new Todo: $todo")
+        LOGGER.debug("Creating a new Todo: {}", todo)
         val savedTodoEntity = todoRepository.save(
             todoMapper.mapToEntity(todo)
         )
@@ -21,7 +21,7 @@ class TodoPersistenceCommandAdapter(
     }
 
     override fun modify(uuid: UUID, todo: Todo): Todo {
-        LOGGER.debug("Modifying the Todo[$uuid]: $todo")
+        LOGGER.debug("Modifying the Todo[{}]: {}", uuid, todo)
         val savedTodo = findTodoByIdOrThrow(uuid)
         todoMapper.copyToEntity(todo, savedTodo)
 
@@ -29,7 +29,7 @@ class TodoPersistenceCommandAdapter(
     }
 
     override fun delete(uuid: UUID): Todo {
-        LOGGER.debug("Deleting the Todo[$uuid]")
+        LOGGER.debug("Deleting the Todo[{}]", uuid)
 
         val saved = findTodoByIdOrThrow(uuid)
         todoRepository.delete(saved)
@@ -38,7 +38,7 @@ class TodoPersistenceCommandAdapter(
     }
 
     override fun toggleDone(uuid: UUID): Todo {
-        LOGGER.debug("toggle done of the Todo[$uuid]")
+        LOGGER.debug("toggle done of the Todo[{}]", uuid)
         val savedTodo = findTodoByIdOrThrow(uuid)
         val todo = todoMapper.mapToDomain(savedTodo)
 

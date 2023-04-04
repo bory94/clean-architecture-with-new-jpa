@@ -1,6 +1,6 @@
 package com.bory.tutorial.cleanarchitecture.user.adapters.`in`.web
 
-import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInCommands
+import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInCommandUsecases
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -11,7 +11,7 @@ import java.util.*
 @RestController
 @RequestMapping
 class UserCommandController(
-    private val genericUserInCommands: GenericUserInCommands
+    private val genericUserInCommands: GenericUserInCommandUsecases
 ) {
     @PostMapping(("/public/v1/users"))
     fun createUser(@RequestBody @Valid user: User) =

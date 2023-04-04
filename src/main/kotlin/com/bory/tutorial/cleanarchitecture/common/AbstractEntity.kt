@@ -8,16 +8,17 @@ import org.springframework.data.annotation.LastModifiedBy
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import java.util.*
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 abstract class AbstractEntity(
     @CreatedBy
-    var createdBy: Long? = null,
+    var createdBy: UUID? = null,
     @CreatedDate
     var createdTime: LocalDateTime? = null,
     @LastModifiedBy
-    var modifiedBy: Long? = null,
+    var modifiedBy: UUID? = null,
     @LastModifiedDate
     var modifiedTime: LocalDateTime? = null
 ) {
