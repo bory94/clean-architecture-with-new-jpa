@@ -2,6 +2,7 @@ package com.bory.tutorial.cleanarchitecture.common.config
 
 import com.bory.tutorial.cleanarchitecture.common.config.filter.JwtAuthenticationFilter
 import com.bory.tutorial.cleanarchitecture.common.service.JwtUserDetailsService
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -27,7 +28,9 @@ class SecurityConfig(
 ) {
     @Bean
     fun httpSecurity(http: HttpSecurity): SecurityFilterChain =
-        http.csrf().disable()
+        http.csrf().disable().headers()
+            .frameOptions().sameOrigin()
+            .and()
             .formLogin().disable()
             .exceptionHandling()
             .and()
@@ -36,6 +39,7 @@ class SecurityConfig(
             .authorizeHttpRequests { authorize ->
                 authorize
                     .requestMatchers("/public/**").permitAll()
+                    .requestMatchers(toH2Console()).permitAll()
                     .anyRequest().authenticated()
             }
             .authenticationProvider(authenticationProvider())
