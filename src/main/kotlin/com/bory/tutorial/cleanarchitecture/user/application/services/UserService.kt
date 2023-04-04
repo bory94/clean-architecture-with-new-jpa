@@ -5,7 +5,7 @@ import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUs
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.GenericUserInQueryUsecases
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommandUsecases
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutQueryUsecases
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmailUsecase
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.QueryByEmailUsecase
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -17,7 +17,7 @@ import java.util.*
 @Transactional
 class UserService(
     private val genericUserOutQueries: GenericUserOutQueryUsecases,
-    private val userQueryByEmail: UserQueryByEmailUsecase,
+    private val queryByEmail: QueryByEmailUsecase,
     private val genericUserOutCommands: GenericUserOutCommandUsecases,
     private val passwordEncoder: PasswordEncoder
 ) : GenericUserInCommandUsecases, GenericUserInQueryUsecases {
@@ -28,7 +28,7 @@ class UserService(
     override fun findOne(uuid: UUID): User = genericUserOutQueries.findOne(uuid)
 
     override fun create(user: User): User {
-        if (userQueryByEmail.existsByEmail(
+        if (queryByEmail.existsByEmail(
                 user.email ?: throw IllegalArgumentException("Email cannot be null")
             )
         ) {

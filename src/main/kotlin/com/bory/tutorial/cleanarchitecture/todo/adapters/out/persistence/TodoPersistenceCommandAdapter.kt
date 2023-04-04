@@ -2,6 +2,7 @@ package com.bory.tutorial.cleanarchitecture.todo.adapters.out.persistence
 
 import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.GenericTodoOutCommandUsecases
+import com.bory.tutorial.cleanarchitecture.todo.application.ports.out.ToggleTodoUsecase
 import com.bory.tutorial.cleanarchitecture.todo.domain.Todo
 import org.springframework.stereotype.Component
 import java.util.*
@@ -10,7 +11,7 @@ import java.util.*
 class TodoPersistenceCommandAdapter(
     private val todoRepository: TodoRepository,
     private val todoMapper: TodoMapper
-) : GenericTodoOutCommandUsecases {
+) : GenericTodoOutCommandUsecases, ToggleTodoUsecase {
     override fun create(todo: Todo): Todo {
         LOGGER.debug("Creating a new Todo: {}", todo)
         val savedTodoEntity = todoRepository.save(

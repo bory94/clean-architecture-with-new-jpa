@@ -2,7 +2,7 @@ package com.bory.tutorial.cleanarchitecture.user.application.services
 
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignUpCommandUsecase
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutCommandUsecases
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmailUsecase
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.QueryByEmailUsecase
 import com.bory.tutorial.cleanarchitecture.user.domain.SignUpVo
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SignUpService(
     private val genericUserOutCommands: GenericUserOutCommandUsecases,
-    private val userQueryByEmail: UserQueryByEmailUsecase,
+    private val queryByEmail: QueryByEmailUsecase,
     private val passwordEncoder: PasswordEncoder
 ) : SignUpCommandUsecase {
     override fun signUp(signUpVo: SignUpVo): User {
         when {
             signUpVo.password != signUpVo.passwordConfirm -> throw IllegalArgumentException("Passwords not match")
-            userQueryByEmail.existsByEmail(signUpVo.email) ->
+            queryByEmail.existsByEmail(signUpVo.email) ->
                 throw java.lang.IllegalArgumentException("Email already exists")
         }
 

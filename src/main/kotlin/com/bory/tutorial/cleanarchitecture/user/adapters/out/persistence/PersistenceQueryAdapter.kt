@@ -2,16 +2,16 @@ package com.bory.tutorial.cleanarchitecture.user.adapters.out.persistence
 
 import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.GenericUserOutQueryUsecases
-import com.bory.tutorial.cleanarchitecture.user.application.ports.out.UserQueryByEmailUsecase
+import com.bory.tutorial.cleanarchitecture.user.application.ports.out.QueryByEmailUsecase
 import com.bory.tutorial.cleanarchitecture.user.domain.User
 import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class UserPersistenceQueryAdapter(
+class PersistenceQueryAdapter(
     private val userRepository: UserRepository,
     private val userMapper: UserMapper
-) : GenericUserOutQueryUsecases, UserQueryByEmailUsecase {
+) : GenericUserOutQueryUsecases, QueryByEmailUsecase {
     override fun findAll(): List<User> = userRepository.findAll().map { userMapper.toDomain(it) }
 
     override fun findOne(uuid: UUID): User =
