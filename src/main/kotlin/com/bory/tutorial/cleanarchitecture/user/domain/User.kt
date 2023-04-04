@@ -44,14 +44,14 @@ class User(
     override fun isEnabled(): Boolean = true
 }
 
-data class SignInVo(
+data class SignInDto(
     @Email
     val email: String,
     @NotEmpty @Length(min = 8)
     val password: String
 )
 
-data class SignUpVo(
+data class SignUpDto(
     @NotEmpty @Length(min = 3)
     val name: String,
     @Email

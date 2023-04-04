@@ -5,7 +5,7 @@ import com.bory.tutorial.cleanarchitecture.common.service.JwtService
 import com.bory.tutorial.cleanarchitecture.exception.ResourceNotFoundException
 import com.bory.tutorial.cleanarchitecture.user.application.ports.`in`.SignInCommandUsecase
 import com.bory.tutorial.cleanarchitecture.user.application.ports.out.QueryByEmailUsecase
-import com.bory.tutorial.cleanarchitecture.user.domain.SignInVo
+import com.bory.tutorial.cleanarchitecture.user.domain.SignInDto
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -20,11 +20,11 @@ class SignInService(
     private val passwordEncoder: PasswordEncoder,
     private val jwtService: JwtService
 ) : SignInCommandUsecase {
-    override fun signIn(signInVo: SignInVo): String {
+    override fun signIn(signInDto: SignInDto): String {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                signInVo.email,
-                signInVo.password
+                signInDto.email,
+                signInDto.password
             )
         )
 
@@ -36,7 +36,7 @@ class SignInService(
         val savedUser = queryByEmail.findByEmail(authentication.name)
             ?: throw ResourceNotFoundException("User[${authentication.name} not found")
 
-        if (!passwordEncoder.matches(signInVo.password, savedUser.password)) {
+        if (!passwordEncoder.matches(signInDto.password, savedUser.password)) {
             throw ResourceNotFoundException("User[${authentication.name} not found")
         }
 

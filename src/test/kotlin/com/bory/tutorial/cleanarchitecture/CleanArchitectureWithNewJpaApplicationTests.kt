@@ -2,8 +2,8 @@ package com.bory.tutorial.cleanarchitecture
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.modulith.core.ApplicationModules
 import org.springframework.modulith.docs.Documenter
-import org.springframework.modulith.model.ApplicationModules
 
 @SpringBootTest
 class CleanArchitectureWithNewJpaApplicationTests {
