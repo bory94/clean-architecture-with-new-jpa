@@ -13,8 +13,8 @@ import java.util.*
 class AuditConfig {
     @Bean
     fun currentAuditor(): AuditorAware<UUID> = AuditorAware {
-        when (val authDetails = SecurityContextHolder.getContext().authentication.details) {
-            is User -> Optional.of(authDetails.uuid)
+        when (val principal = SecurityContextHolder.getContext().authentication.principal) {
+            is User -> Optional.of(principal.uuid)
             else -> Optional.of(UUID.randomUUID())
         }
     }
